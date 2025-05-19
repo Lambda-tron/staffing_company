@@ -149,7 +149,6 @@ def getCompanies():
     headers = ["Company ID", "Name", "Industry", "Current Active Contracts"]
     print(tabulate(result, headers=headers, tablefmt="fancy_grid"))
 
-
 def show_stat():
     queries = {
         "Total Active Employees": "SELECT count(*) FROM getEmployees WHERE currently_working = 'Yes' COLLATE utf8mb4_unicode_ci;",
@@ -175,14 +174,32 @@ def show_stat():
         else:
             print(f"→ {result[0][0]}")
 
+    print("\n"*2)
+
+def getEmployeeRecommendations():
+    query = "SELECT r.employee_id, name, score, comment FROM employees JOIN recommendations r ON employees.employee_id = r.employee_id;"
+    db.execute(query)
+    result = db.fetchall()
+    headers = ["Employee ID", "Name", "Score", "Comment"]
+    if result:
+        print(tabulate(result, headers=headers, tablefmt="fancy_grid"))
+    else:
+        print("No recommendations found.")
 
 
 
 
+choices = [
+    "Add an employee",
+    "Add a company",
+    "Write a contract for an employee",
+    "See specific employee schedule",
+    "See all employees",
+    "See all companies",
+    "See Statistics",
+    "See Employee Recommendations"
+]
 
-
-
-choices=["Add an employee", "Add a companies", "Write a contract for an employee", "See specific employee schedual", "See all employees", "See all companies", "See Statistics"]
 
 def main():
     print("Welcome to the staff management application!")
@@ -218,6 +235,9 @@ def main():
                 getCompanies()
             elif(intInput == 7):
                 show_stat()
+            elif(intInput == 8):
+                getEmployeeRecommendations()
+
     time.sleep(2)
 
 
