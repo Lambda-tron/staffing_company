@@ -315,31 +315,24 @@ SELECT companies.company_id,name,industry, COUNT(
 
 
 #get total active employees
-SELECT count(*) FROM getEmployees WHERE currently_working = "Yes";
+#SELECT count(*) FROM getEmployees WHERE currently_working = "Yes";
 #get total inactive
-SELECT count(*) FROM getEmployees WHERE currently_working = "No";
+#SELECT count(*) FROM getEmployees WHERE currently_working = "No";
 #get total companies working with
-SELECT count(*) FROM companies;
+#SELECT count(*) FROM companies;
 
 #get available worker based on field
-SELECT field,count(*) FROM getEmployees WHERE currently_working = "No" GROUP BY field;
+#SELECT field,count(*) FROM getEmployees WHERE currently_working = "No" GROUP BY field;
 
 #avarage paycheck from each sector
-SELECT field, CAST(AVG(CAST(hourly_pay AS INT)) AS INT) AS average_paycheck FROM employees INNER JOIN contracts c ON employees.employee_id = c.employee_id GROUP BY field;
+#SELECT field, CAST(AVG(CAST(hourly_pay AS INT)) AS INT) AS average_paycheck FROM employees INNER JOIN contracts c ON employees.employee_id = c.employee_id GROUP BY field;
 
 #average length of working contract
-SELECT CAST(AVG(DATEDIFF(end_date, start_date)) AS INT) AS average_duration_days FROM contracts;
+#SELECT CAST(AVG(DATEDIFF(end_date, start_date)) AS INT) AS average_duration_days FROM contracts;
 
 #msot popular working location
-SELECT city  FROM contracts GROUP BY city ORDER BY count(city) DESC LIMIT 1;
+#SELECT city  FROM contracts GROUP BY city ORDER BY count(city) DESC LIMIT 1;
 
 #see current scored employees
-SELECT r.employee_id,name,score,comment FROM employees JOIN recommendations r on employees.employee_id = r.employee_id;
-
-
-SELECT * FROM getEmployees;
-SELECT * FROM contracts;
-SELECT * FROM companies;
-SELECT * FROM employees;
-
+#SELECT r.employee_id,name,score,comment FROM employees JOIN recommendations r on employees.employee_id = r.employee_id;
 
